@@ -1,0 +1,131 @@
+/* Canvas.css */
+
+/* The main wrapper */
+/* 1. The "Desk" Background */
+.canvas-container {
+  position: relative;
+  width: 98vw;
+  height: 100vh;
+  overflow: hidden;
+  /* Use a subtle pattern or gray color to contrast with the white board */
+  background-color: #f0f2f5; 
+  background-image: radial-gradient(#dee2e6 1px, transparent 1px);
+  background-size: 20px 20px;
+  
+  
+  /* Center the board */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 2. The "Whiteboard" Sheet */
+.canvas {
+  display: block;
+  background-color: #ffffff; /* Explicit white background */
+  cursor: crosshair;
+  
+  /* Make it look like a physical board */
+  width: 95% !important;  /* Leave space for the edges */
+  height: 90% !important; /* Leave space for the edges */
+  border-radius: 12px;    /* Smooth corners */
+  
+  /* The Shadow Highlighting you asked for */
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.15), /* Soft Drop Shadow */
+    0 0 0 1px rgba(0, 0, 0, 0.05);   /* Thin Border Outline */
+}
+
+/* ... Keep the rest of your toolbar CSS the same ... */
+
+/* The floating toolbar */
+.toolbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  align-items: center;
+}
+
+/* Color Picker Input */
+.color-picker {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+}
+
+/* Size Slider Group */
+.size-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.size-label {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.size-slider {
+  width: 80px;
+  cursor: pointer;
+}
+
+/* Eraser Button */
+.eraser-btn {
+  padding: 6px 12px;
+  background: #f0f0f0;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.2s;
+}
+
+/* Dynamic class for when eraser is selected */
+.eraser-btn.active {
+  background: #e2e2e2;
+  border-color: #999;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Vertical Divider */
+.divider {
+  width: 1px;
+  height: 20px;
+  background: #e0e0e0;
+}
+
+/* Icon Buttons (Undo/Redo) */
+.icon-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #555; /* Dark gray icon color */
+  padding: 8px;
+  border-radius: 50%;
+  display: flex; /* Centers the SVG */
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+  background-color: #f0f0f0; /* Light gray circle on hover */
+  color: #000;
+}
+
+.icon-btn:active {
+  transform: scale(0.9);
+}
