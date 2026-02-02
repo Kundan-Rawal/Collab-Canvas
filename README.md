@@ -2,6 +2,9 @@
 
 A MERN stack application allowing multiple users to draw, undo/redo, and see each other's cursors in real-time.
 
+Deployed Backend URL : https://collab-canvas-4wjs.onrender.com
+Deployed Frontend URL : https://collab-canvas-kappa-eight.vercel.app/
+
 ## Features
 - 🎨 **Real-time Drawing:** Low-latency synchronization using Socket.io.
 - ↩️ **Global Undo/Redo:** Shared history stack across all connected users.
