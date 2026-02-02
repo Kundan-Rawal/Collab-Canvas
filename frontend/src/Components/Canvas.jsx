@@ -19,8 +19,7 @@ const Canvas = () => {
   const lastYCordinate = useRef(0);
 
   useEffect(() => {
-    // 1. Connect
-    // Use env variable for production, fallback to localhost for dev
+
     const serverUrl =
       import.meta.env.VITE_SERVER_URL || "http://localhost:3000";
     socketRef.current = io(serverUrl);
@@ -66,6 +65,30 @@ const Canvas = () => {
       });
     });
 
+    socketRef.current.on("load_history", (history) => {
+      const ctx = contextRef.current;
+      const canvas = canvasRef.current;
+
+      // Wipe board (just in case)
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Replay History
+      history.forEach((stroke) => {
+        ctx.beginPath();
+        ctx.strokeStyle = stroke.color;
+        ctx.lineWidth = stroke.width;
+
+        if (stroke.points.length > 0) {
+          ctx.moveTo(stroke.points[0].x, stroke.points[0].y);
+          stroke.points.forEach((point) => {
+            ctx.lineTo(point.x, point.y);
+          });
+          ctx.stroke();
+        }
+        ctx.closePath();
+      });
+    });
+
     // 4. Canvas Initialization
     const canvas = canvasRef.current;
     canvas.width = window.innerWidth * 2;
@@ -81,6 +104,11 @@ const Canvas = () => {
     context.lineWidth = lineWidth;
     contextRef.current = context;
 
+    socketRef.current.on("get_canvas_state", () => {
+       // If the server doesn't auto-send, we might need to ask. 
+       // But typically, we just listen for the data:
+    });
+    
     // 5. Keyboard Shortcuts
     const handleKeyDown = (e) => {
       if (!e.ctrlKey && !e.metaKey) return;
